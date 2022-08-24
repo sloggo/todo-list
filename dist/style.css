@@ -27,14 +27,34 @@ header{
     color: rgb(71, 71, 71);
 }
 
-header input{
+.searchBar{
+    display: flex;
+    width: 50%;
     align-self: center;
+    align-items: center;
+    gap: 20px;
     padding: 10px;
     width: 50%;
-    height: 40px;
+    height: 30px;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: rgb(233, 233, 233);
+}
+
+.searchBar img{
+    width: 25px;
+}
+
+header input{
+    margin: 0px 10px;
+    width: 100%;
+    height: 20px;
+    border: none;
+    background-color: rgb(233, 233, 233)
+}
+
+header input:focus{
+    border: none;
 }
 
 header a{
@@ -80,4 +100,88 @@ div#sidebar li{
 div#sidebar li:hover{
     border-left: 5px solid rgb(255, 255, 255);
     transition: 0.2s ease;
+}
+
+div#cardContainer{
+    font-family: 'Roboto', sans-serif;
+    margin: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 250px;
+    grid-auto-rows: 250px;
+    gap:20px;
+}
+
+div#cardContainer div.card{
+    padding: 20px;
+    gap:10px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.068);
+
+    display: flex;
+    flex-direction: column;
+}
+
+div#cardContainer div.card.complete{
+    border: 5px solid rgb(185, 255, 185);
+}
+
+div#cardContainer div.card h2{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+div#cardContainer div.card p#date{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+div#cardContainer div.card div.titleContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+div#cardContainer div.card div.titleContainer div#colourCircle{
+    background-color: rgb(0, 217, 255);
+    align-self: center;
+    height: 80%;
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+}
+
+div#cardContainer div.card div.bottomControls{
+    padding: 0px 10px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-top: auto;
+}
+
+div#cardContainer div.card div.bottomControls img#trash{
+    background-color: rgb(255, 173, 173);
+    padding: 5px;
+    border-radius: 100px;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.068)
+}
+
+div#cardContainer div.card div.bottomControls input{
+    transform: scale(2);
+}
+
+div#cardContainer div.card div.bottomControls button{
+    padding: 12px 40px;
+    margin-left: auto;
+    border: none;
+
+    background-color: #e4e4e4;
+    border-radius: 200px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.068)
+}
+
+div#cardContainer div.card div.bottomControls input:active,
+div#cardContainer div.card div.bottomControls img#trash:active,
+div#cardContainer div.card div.bottomControls button:active{
+    transform: scale(0.7);
+    transition: 1s ease;
 }
