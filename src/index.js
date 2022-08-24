@@ -1,5 +1,5 @@
-import { displayController } from "./display";
-import { taskController } from './task'
+import { taskDisplay } from "./taskDisplay";
+import { taskController } from './taskController'
 
 console.log('start')
-displayController.createTaskCard(taskController.createTask('name', 'desc', 'priority', 'date'))
+taskDisplay.createTaskCard(taskController.createTask('name', 'desc', 'priority', 'date'))

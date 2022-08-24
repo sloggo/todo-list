@@ -1,6 +1,6 @@
-import { taskController } from "./task";
+import { taskController } from "./taskController";
 
-const displayController = (function () {
+const taskDisplay = (function () {
 
     function createTaskCard(task){
         const $cardContainer = document.querySelector('div#cardContainer');
@@ -70,4 +70,4 @@ const displayController = (function () {
 })()
 
 
-export {displayController}
+export {taskDisplay}
