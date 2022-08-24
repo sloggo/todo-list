@@ -1,0 +1,83 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Arvo', sans-serif;
+    background-image: linear-gradient(#FF8787, #FFD28D);
+
+    display: grid;
+    grid-template-columns: 250px 7fr;
+    grid-template-rows: 100px calc(100vh - 100px);
+    grid-template-areas: "header header"
+    "sidebar content";
+}
+
+header{
+    display: flex;
+    align-content: center;
+    gap: 150px;
+
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    grid-area: header;
+
+    background-color: rgb(255, 255, 255);
+    color: rgb(71, 71, 71);
+}
+
+header input{
+    align-self: center;
+    padding: 10px;
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(233, 233, 233);
+}
+
+header a{
+    margin-left: auto;
+    align-self: center;
+}
+
+header img{
+    width: 35px;
+}
+
+header img:hover{
+    transform: scale(1.05);
+    transition: 0.5s ease;
+}
+
+div#sidebar{
+    grid-area: sidebar;
+    padding-top: 75px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(71, 71, 71);
+    color: white;
+}
+
+div#sidebar ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+div#sidebar li{
+    margin-top: 30px;
+    padding-left: 20%;
+    list-style: none;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: 0.5s ease;
+}
+
+div#sidebar li:hover{
+    border-left: 5px solid rgb(255, 255, 255);
+    transition: 0.2s ease;
+}
