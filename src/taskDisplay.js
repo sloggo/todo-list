@@ -1,9 +1,10 @@
 import { taskController } from "./taskController";
 
 const taskDisplay = (function () {
+    const $cardContainer = document.querySelector('div#cardContainer');
+    const $contentDiv = document.querySelector('div#content');
 
     function createTaskCard(task){
-        const $cardContainer = document.querySelector('div#cardContainer');
         console.log('creatingcard');
     
         const $cardDiv = document.createElement('div');
@@ -61,11 +62,68 @@ const taskDisplay = (function () {
 
     function removeTask(task){
         taskController.removeTask(task)
-        //renderDash()
+        renderTasks()
     } 
 
+    function renderTasks(){
+        $cardContainer.innerHTML = '';
+        taskController.getTasks().forEach(task => {
+            createTaskCard(task)
+        })
+    }
+
+    function createTaskPopup(){
+        const $createTaskPopupContainer = document.createElement('div');
+        $createTaskPopupContainer.classList.add('createTaskPopup');
+
+        const $h2 = document.createElement('h2');
+        $h2.textContent='Create a Task';
+        $createTaskPopupContainer.appendChild($h2);
+
+        const $form = document.createElement('form');
+
+        const $formTitleContainer = document.createElement('div');
+        $formTitleContainer.classList.add('formInputContainer');
+
+        const $formTitleLabel = document.createElement('label');
+        $formTitleLabel.setAttribute('for', 'title')
+        $formTitleLabel.textContent = 'Title'
+        $formTitleContainer.appendChild($formTitleLabel)
+
+        const $formTitleInput = document.createElement('input');
+        $formTitleInput.type = 'text';
+        $formTitleInput.name = 'title';
+        $formTitleContainer.appendChild($formTitleInput);
+
+        $form.appendChild($formTitleContainer)
+
+        const $formDescriptionContainer = document.createElement('div');
+        $formDescriptionContainer.classList.add('formInputContainer');
+
+        const $formDescriptionLabel = document.createElement('label');
+        $formDescriptionLabel.setAttribute('for', 'description')
+        $formDescriptionLabel.textContent = 'Description'
+        $formDescriptionContainer.appendChild($formDescriptionLabel)
+
+        const $formDescriptionInput = document.createElement('input');
+        $formDescriptionInput.type = 'text';
+        $formDescriptionInput.name = 'description';
+        $formDescriptionContainer.appendChild($formDescriptionInput);
+
+        $form.appendChild($formDescriptionContainer);
+        $createTaskPopupContainer.appendChild($form)
+
+        $contentDiv.appendChild($createTaskPopupContainer)
+        
+    }
+
+    function createTaskUi() {
+        createTaskPopup()
+    }
+
     return{
-        createTaskCard
+        createTaskCard,
+        createTaskPopup
     }
 })()
 

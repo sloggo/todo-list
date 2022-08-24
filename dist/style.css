@@ -185,3 +185,84 @@ div#cardContainer div.card div.bottomControls button:active{
     transform: scale(0.7);
     transition: 1s ease;
 }
+
+div.createTaskPopup{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    height: 700px;
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.178);
+    border-radius: 30px;
+}
+
+div.createTaskPopup h2{
+    font-size: 2rem;
+}
+
+div.createTaskPopup div.formInputContainer{
+    padding: 0px 15px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+div.createTaskPopup div.formInputContainer label{
+    font-size: 1.3rem;
+}
+
+div.createTaskPopup div.formInputContainer input{
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    height: 30px;
+    width: 100%;
+    border: none;
+    background-color: rgb(233, 233, 233);
+    border-radius: 100px;
+    color: rgb(128, 128, 128);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.radioContainer{
+    display: flex;
+}
+
+.labelRadioContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 42px;
+}
+
+.labelRadioContainer label{
+    transform: scale(0.8);
+}
+
+div.formInputContainer label[for='priority']{
+    margin-bottom: 10px;
+}
+
+div.createTaskPopup button{
+    margin-top: 40px;
+    align-self: center;
+    padding: 10px 30px;
+    width: 200px;
+    border: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.178);
+    background-color:  rgb(185, 255, 185);
+}
