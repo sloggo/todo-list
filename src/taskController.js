@@ -1,4 +1,5 @@
 import { taskDisplay } from "./taskDisplay";
+import { allController } from "./allController";
 
 const taskController = (function () {
     let tasks = [];
@@ -9,8 +10,11 @@ const taskController = (function () {
 
     function createTask(title, description, priority, date) {
         let newTask = {title,description,priority,date, complete: false,};
-        newTask.id = tasks.length
+        newTask.taskid = tasks.length
+        newTask.id = allController.getAllLength()
+        console.log(newTask.id)
         tasks.push(newTask)
+        allController.add(newTask)
         taskDisplay.renderTasks()
         return newTask
     }

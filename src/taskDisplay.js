@@ -1,3 +1,4 @@
+import { allController } from "./allController";
 import { taskController } from "./taskController";
 
 const taskDisplay = (function () {
@@ -8,7 +9,7 @@ const taskDisplay = (function () {
         console.log('creatingcard');
     
         const $cardDiv = document.createElement('div');
-        $cardDiv.id = task.id
+        $cardDiv.setAttribute('taskid', task.taskid)
         $cardDiv.classList.add('card');
         let circleColour = "";
 
@@ -55,7 +56,8 @@ const taskDisplay = (function () {
         $removeButton.id = 'trash';
 
         $removeButton.addEventListener('click', (e) => {
-            removeTask(e.target.parentNode.parentNode.id);
+            removeTask(e.target.parentNode.parentNode.taskid);
+            removeFromAll(e.target.parentNode.parentNode.id)
         })
 
         return $removeButton;
@@ -96,6 +98,11 @@ const taskDisplay = (function () {
         taskController.removeTask(task)
         renderTasks()
     } 
+
+    function removeFromAll(task){
+        allController.remove(task)
+        renderTasks()
+    }
 
     function renderTasks(){
         $cardContainer.innerHTML = '';
