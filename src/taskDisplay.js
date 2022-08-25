@@ -11,6 +11,7 @@ const taskDisplay = (function () {
         const $cardDiv = document.createElement('div');
         $cardDiv.setAttribute('taskid', task.taskid)
         $cardDiv.classList.add('card');
+        $cardDiv.classList.add('task');
         let circleColour = "";
 
         if(task.priority === 'high'){

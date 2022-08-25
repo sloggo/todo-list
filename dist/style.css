@@ -122,7 +122,7 @@ div#cardContainer{
     gap:20px;
 }
 
-div#cardContainer div.card{
+div#cardContainer div.card.task{
     animation: dropIn .5s;
     padding: 20px;
     gap:10px;
@@ -134,26 +134,27 @@ div#cardContainer div.card{
     flex-direction: column;
 }
 
-div#cardContainer div.card.complete{
+div#cardContainer div.card.task.complete,
+div.card.project.complete{
     border: 5px solid rgb(185, 255, 185);
 }
 
-div#cardContainer div.card h2{
+div#cardContainer div.card.task h2{
     font-size: 2.5rem;
     font-weight: 700;
 }
 
-div#cardContainer div.card p#date{
+div#cardContainer div.card.task p#date{
     font-weight: 600;
     font-size: 1.5rem;
 }
 
-div#cardContainer div.card div.titleContainer{
+div#cardContainer div.card.task div.titleContainer{
     display: flex;
     justify-content: space-between;
 }
 
-div#cardContainer div.card div.titleContainer div#colourCircle{
+div#cardContainer div.card.task div.titleContainer div#colourCircle{
     background-color: #ff6e6e;
     align-self: center;
     height: 80%;
@@ -161,7 +162,7 @@ div#cardContainer div.card div.titleContainer div#colourCircle{
     aspect-ratio: 1/1;
 }
 
-div#cardContainer div.card div.bottomControls{
+div#cardContainer div.card.task div.bottomControls{
     padding: 0px 10px;
     display: flex;
     gap: 30px;
@@ -169,18 +170,18 @@ div#cardContainer div.card div.bottomControls{
     margin-top: auto;
 }
 
-div#cardContainer div.card div.bottomControls img#trash{
+div#cardContainer div.card.task div.bottomControls img#trash{
     background-color: rgb(255, 173, 173);
     padding: 5px;
     border-radius: 100px;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.068)
 }
 
-div#cardContainer div.card div.bottomControls input{
+div#cardContainer div.card.task div.bottomControls input{
     transform: scale(2);
 }
 
-div#cardContainer div.card div.bottomControls button{
+div#cardContainer div.card.task div.bottomControls button{
     padding: 12px 40px;
     margin-left: auto;
     border: none;
@@ -190,9 +191,9 @@ div#cardContainer div.card div.bottomControls button{
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.068)
 }
 
-div#cardContainer div.card div.bottomControls input:active,
-div#cardContainer div.card div.bottomControls img#trash:active,
-div#cardContainer div.card div.bottomControls button:active{
+div#cardContainer div.card.task div.bottomControls input:active,
+div#cardContainer div.card.task div.bottomControls img#trash:active,
+div#cardContainer div.card.task div.bottomControls button:active{
     transform: scale(0.7);
     transition: 1s ease;
 }
@@ -289,4 +290,74 @@ div.createTaskPopup p#remButton{
     border: none;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.178);
     background-color:  rgb(255, 125, 125);
+}
+
+
+div.card.project{
+    animation: dropIn .5s;
+    padding: 20px;
+    gap:10px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 30px;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.068);
+    grid-row: span 2;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+div.card.project h2{
+    font-size: 1.8rem;
+}
+
+div.projectTaskContainer{
+    overflow: auto;
+    height: 100%;
+}
+
+div.projectTask{
+    padding: 10px 50px;
+    display: flex;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;;
+}
+
+div.projectTask input{
+    margin-left: auto;
+    transform: scale(1.4);
+}
+
+div.projectTask div.colourCircleTask{
+    background-color: #ff6e6e;
+    align-self: center;
+    height: 20px;
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+}
+
+div.card.project h3{
+    margin-top: auto;
+    align-self: center;
+    font-size: 2rem;
+}
+
+div.topTask{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+div.topTask .title{
+    font-weight: bold;
+}
+
+div.topTask .date{
+    font-size: 0.8rem;
+}
+
+div.taskText{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
