@@ -317,6 +317,7 @@ div.projectTaskContainer{
 }
 
 div.projectTask{
+    width: 80%;
     padding: 10px 50px;
     display: flex;
     border-top: 1px solid #e4e4e4;
@@ -337,6 +338,10 @@ div.projectTask div.colourCircleTask{
 }
 
 div.card.project h3{
+    padding-top: 15px;
+    border-top: 2px solid #e4e4e4;
+    width: 100%;
+    text-align: center;
     margin-top: auto;
     align-self: center;
     font-size: 2rem;
