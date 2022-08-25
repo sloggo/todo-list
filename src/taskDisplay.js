@@ -10,10 +10,24 @@ const taskDisplay = (function () {
         const $cardDiv = document.createElement('div');
         $cardDiv.id = task.id
         $cardDiv.classList.add('card');
+        let circleColour = "";
+
+        if(task.priority === 'high'){
+            circleColour = '#ff6e6e';
+        } else if(task.priority === 'medium'){
+            circleColour = '#ffb46e';
+        } else if(task.priority === 'low'){
+            circleColour = '#fdff8d';
+        }
+
+        if(task.complete){
+            $cardDiv.classList.add('complete');
+        }
+
         $cardDiv.innerHTML += `
         <div class="titleContainer">
             <h2 id="title">${task.title}</h2>
-            <div id="colourCircle">&nbsp;</div>
+            <div id="colourCircle" style='background-color:${circleColour};'>&nbsp;</div>
         </div>
         <p id="desc">${task.description}</p>
         <p id="date">${task.date}</p>
@@ -22,6 +36,7 @@ const taskDisplay = (function () {
         $cardDiv.appendChild(createBottomControls())
         $cardContainer.appendChild($cardDiv)
     }
+
 
     function createBottomControls(){
         const $bottomControls = document.createElement('div');
@@ -49,6 +64,23 @@ const taskDisplay = (function () {
     function createCheckBox(){
         const $checkBox = document.createElement('input');
         $checkBox.type = 'checkbox';
+
+        $checkBox.addEventListener('change', (e) =>{
+            const $task = $checkBox.parentNode.parentNode;
+            const taskId = $task.id
+
+            const tasks = taskController.getTasks()
+
+            const taskToUpdate = tasks.find(item => item.id === parseInt(taskId));
+
+            if(taskToUpdate.complete === false){
+                taskToUpdate.complete = true;
+                $task.classList.toggle('complete');
+            } else if(taskToUpdate.complete === true) {
+                taskToUpdate.complete = false;
+                $task.classList.toggle('complete');
+            }
+        })
 
         return $checkBox;
     }
@@ -82,48 +114,71 @@ const taskDisplay = (function () {
 
         const $form = document.createElement('form');
 
-        const $formTitleContainer = document.createElement('div');
-        $formTitleContainer.classList.add('formInputContainer');
+        $form.innerHTML = `<div class="formInputContainer">
+                <label for="title">Title</label>
+                <input type="text" name="title">
+            </div>
 
-        const $formTitleLabel = document.createElement('label');
-        $formTitleLabel.setAttribute('for', 'title')
-        $formTitleLabel.textContent = 'Title'
-        $formTitleContainer.appendChild($formTitleLabel)
+            <div class="formInputContainer">
+                <label for="description">Description</label>
+                <input type="text" name="description">
+            </div>
 
-        const $formTitleInput = document.createElement('input');
-        $formTitleInput.type = 'text';
-        $formTitleInput.name = 'title';
-        $formTitleContainer.appendChild($formTitleInput);
+            <div class="formInputContainer">
+                <label for="date">Due</label>
+                <input type="date" name="date">
+            </div>
 
-        $form.appendChild($formTitleContainer)
+            <div class="formInputContainer">
+                <label for="priority">Priority</label>
 
-        const $formDescriptionContainer = document.createElement('div');
-        $formDescriptionContainer.classList.add('formInputContainer');
+                <div class="radioContainer">
+                    <input type="radio" name="priority" value="high">
+                    <input type="radio" name="priority" value="medium">
+                    <input type="radio" name="priority" value="low">
+                    
+                </div>
+                <div class="labelRadioContainer">
+                    <label for="high">High</label>
+                    <label for="medium">Medium</label>
+                    <label for="low">Low</label>
+                </div>
+            </div>`
+        
+        let $button = document.createElement('p')
+        $button.id = 'button'
+        $button.textContent = 'Create Task';
 
-        const $formDescriptionLabel = document.createElement('label');
-        $formDescriptionLabel.setAttribute('for', 'description')
-        $formDescriptionLabel.textContent = 'Description'
-        $formDescriptionContainer.appendChild($formDescriptionLabel)
+        $button.addEventListener('click', (e) => {
+            createTaskFromInput()
+        })
 
-        const $formDescriptionInput = document.createElement('input');
-        $formDescriptionInput.type = 'text';
-        $formDescriptionInput.name = 'description';
-        $formDescriptionContainer.appendChild($formDescriptionInput);
+        $form.appendChild($button);
 
-        $form.appendChild($formDescriptionContainer);
         $createTaskPopupContainer.appendChild($form)
 
         $contentDiv.appendChild($createTaskPopupContainer)
         
     }
 
-    function createTaskUi() {
-        createTaskPopup()
+    function createTaskFromInput() {
+        const title = document.querySelector('input[name="title"]');
+        const description = document.querySelector('input[name="description"]').value;
+        const date = document.querySelector('input[name="date"]').value;
+        const priority = document.querySelector('input[name="priority"]:checked').value;
+
+        taskController.createTask(title.value, description, priority, date);
+
+        const $createTaskPopupContainer = title.parentNode.parentNode.parentNode;
+        $createTaskPopupContainer.replaceChildren();
+        $createTaskPopupContainer.remove()
+
     }
 
     return{
         createTaskCard,
-        createTaskPopup
+        createTaskPopup,
+        renderTasks,
     }
 })()
 

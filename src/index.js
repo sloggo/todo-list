@@ -2,6 +2,8 @@ import { taskDisplay } from "./taskDisplay";
 import { taskController } from './taskController'
 
 console.log('start')
-taskDisplay.createTaskCard(taskController.createTask('name', 'desc', 'priority', 'date'))
 
-taskDisplay.createTaskPopup()
+const $createTaskButton = document.querySelector('li#createTask');
+$createTaskButton.addEventListener('click', () => {
+    taskDisplay.createTaskPopup()
+});
