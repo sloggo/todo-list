@@ -102,6 +102,16 @@ div#sidebar li:hover{
     transition: 0.2s ease;
 }
 
+@keyframes dropIn{
+    from{
+        transform: translateY(-100%);
+        opacity: 0;
+    }to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
 div#cardContainer{
     font-family: 'Roboto', sans-serif;
     margin: 30px;
@@ -113,6 +123,7 @@ div#cardContainer{
 }
 
 div#cardContainer div.card{
+    animation: dropIn .5s;
     padding: 20px;
     gap:10px;
     background-color: white;
@@ -187,6 +198,7 @@ div#cardContainer div.card div.bottomControls button:active{
 }
 
 div.createTaskPopup{
+    animation: dropIn .3s;
     padding: 20px;
     display: flex;
     flex-direction: column;
