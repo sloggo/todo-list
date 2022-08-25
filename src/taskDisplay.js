@@ -105,60 +105,77 @@ const taskDisplay = (function () {
     }
 
     function createTaskPopup(){
-        const $createTaskPopupContainer = document.createElement('div');
-        $createTaskPopupContainer.classList.add('createTaskPopup');
+        if(!document.body.contains(document.querySelector('.createTaskPopup'))){
+            const $createTaskPopupContainer = document.createElement('div');
+            $createTaskPopupContainer.classList.add('createTaskPopup');
 
-        const $h2 = document.createElement('h2');
-        $h2.textContent='Create a Task';
-        $createTaskPopupContainer.appendChild($h2);
+            const $h2 = document.createElement('h2');
+            $h2.textContent='Create a Task';
+            $createTaskPopupContainer.appendChild($h2);
 
-        const $form = document.createElement('form');
+            const $form = document.createElement('form');
 
-        $form.innerHTML = `<div class="formInputContainer">
-                <label for="title">Title</label>
-                <input type="text" name="title">
-            </div>
-
-            <div class="formInputContainer">
-                <label for="description">Description</label>
-                <input type="text" name="description">
-            </div>
-
-            <div class="formInputContainer">
-                <label for="date">Due</label>
-                <input type="date" name="date">
-            </div>
-
-            <div class="formInputContainer">
-                <label for="priority">Priority</label>
-
-                <div class="radioContainer">
-                    <input type="radio" name="priority" value="high">
-                    <input type="radio" name="priority" value="medium">
-                    <input type="radio" name="priority" value="low">
-                    
+            $form.innerHTML = `<div class="formInputContainer">
+                    <label for="title">Title</label>
+                    <input type="text" name="title">
                 </div>
-                <div class="labelRadioContainer">
-                    <label for="high">High</label>
-                    <label for="medium">Medium</label>
-                    <label for="low">Low</label>
+
+                <div class="formInputContainer">
+                    <label for="description">Description</label>
+                    <input type="text" name="description">
                 </div>
-            </div>`
-        
-        let $button = document.createElement('p')
-        $button.id = 'button'
-        $button.textContent = 'Create Task';
 
-        $button.addEventListener('click', (e) => {
-            createTaskFromInput()
-        })
+                <div class="formInputContainer">
+                    <label for="date">Due</label>
+                    <input type="date" name="date">
+                </div>
 
-        $form.appendChild($button);
+                <div class="formInputContainer">
+                    <label for="priority">Priority</label>
 
-        $createTaskPopupContainer.appendChild($form)
+                    <div class="radioContainer">
+                        <input type="radio" name="priority" value="high">
+                        <input type="radio" name="priority" value="medium">
+                        <input type="radio" name="priority" value="low">
+                        
+                    </div>
+                    <div class="labelRadioContainer">
+                        <label for="high">High</label>
+                        <label for="medium">Medium</label>
+                        <label for="low">Low</label>
+                    </div>
+                </div>`
+            
+            let $button = document.createElement('p')
+            $button.id = 'button'
+            $button.textContent = 'Create Task';
 
-        $contentDiv.appendChild($createTaskPopupContainer)
-        
+            $button.addEventListener('click', (e) => {
+                createTaskFromInput()
+            })
+
+            let $remButton = document.createElement('p')
+            $remButton.id = 'remButton'
+            $remButton.textContent = 'Exit';
+
+            $remButton.addEventListener('click', (e) => {
+                closeCreatePopup()
+            })
+
+            $form.appendChild($button);
+            $form.appendChild($remButton);
+
+            $createTaskPopupContainer.appendChild($form)
+
+            $contentDiv.appendChild($createTaskPopupContainer)
+        }
+    }
+
+    function closeCreatePopup(){
+        const $createTaskPopupContainer = document.querySelector('div.createTaskPopup');
+
+        $createTaskPopupContainer.replaceChildren();
+        $createTaskPopupContainer.remove()
     }
 
     function createTaskFromInput() {
@@ -169,9 +186,7 @@ const taskDisplay = (function () {
 
         taskController.createTask(title.value, description, priority, date);
 
-        const $createTaskPopupContainer = title.parentNode.parentNode.parentNode;
-        $createTaskPopupContainer.replaceChildren();
-        $createTaskPopupContainer.remove()
+        closeCreatePopup()
 
     }
 
