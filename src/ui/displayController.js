@@ -3,6 +3,7 @@ import { createController } from '../createController';
 import { createItemUI } from './ui-items/createItemUI'
 import { createProjectCard } from './ui-items/createProjectCard';
 import { createSubTaskUI } from './ui-items/createSubTaskUI';
+import { createToDoCard } from './ui-items/createToDoCard';
 
 const displayController = (function(){
     const $contentDiv = document.querySelector('div#content');
@@ -46,6 +47,20 @@ const displayController = (function(){
         $container.appendChild($bottomControls)
     }
 
+    function createToDo(toDo){
+        const $container = createToDoCard.createContainer(toDo);
+        $cardContainer.appendChild($container);
+
+        const $bottomControls = document.createElement('div');
+        $bottomControls.classList.add('bottomControls');
+        const $removeButton = createToDoCard.createRemoveButton(toDo);
+        const $checkBox = createToDoCard.createCheckBox(toDo);
+        $bottomControls.appendChild($checkBox);
+        $bottomControls.appendChild($removeButton);
+
+        $container.appendChild($bottomControls)
+    }
+
     function renderDash(){
         const items = createController.getItems();
         cleanDash()
@@ -53,7 +68,9 @@ const displayController = (function(){
         items.forEach(item =>{
             if(item.type == 'project'){
                 createProject(item);
-            } 
+            } else if(item.type == 'toDo'){
+                createToDo(item);
+            }
         })
     }
 

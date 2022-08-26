@@ -59,6 +59,23 @@ const createController = (function(){
         displayController.renderDash()
     }
 
+    function removeProject(project){
+        project.subTasks.forEach(task =>{
+            removeSubTask(task);
+        })
+
+        items.splice(items.indexOf(items.find( i => i.itemId ===project.itemId)), 1)
+
+        projectController.remove(project)
+        displayController.renderDash()
+    }
+
+    function removeToDo(toDo){
+        items.splice(items.indexOf(items.find( i => i.itemId ===toDo.itemId)), 1)
+        toDoController.remove(toDo)
+        displayController.renderDash()
+    }
+
     function getItems(){
         return items;
     }
@@ -70,7 +87,9 @@ const createController = (function(){
         createProject,
         createSubTask,
         removeSubTask,
-        getItems
+        getItems,
+        removeProject,
+        removeToDo
     }
 })();
 

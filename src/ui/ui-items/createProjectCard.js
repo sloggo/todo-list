@@ -39,7 +39,7 @@ const createProjectCard = (function(){
                         </div>
                         <img src="./images/trash-2.svg" class="trash" id='${subTask.itemId}'>
 
-                        <input type="checkbox">
+                        <input type="checkbox" id='${subTask.itemId}'>
             `
 
             $projectTaskContainer.appendChild($projectTask)
@@ -48,6 +48,7 @@ const createProjectCard = (function(){
             if(subTask.complete){
                 project.completeTasks++
                 $checkBox.checked = true;
+                e.target.parentNode.classList.add('complete');
             }
 
             const $trashButton = $projectTask.querySelector(`img`);
@@ -128,6 +129,12 @@ const createProjectCard = (function(){
         let $rbut = document.createElement('img');
         $rbut.src='./images/trash-2.svg';
         $rbut.classList.add('removeProjectButton')
+
+        $rbut.addEventListener('click', (e) =>{
+            const project = createController.findItem(e.target.parentNode.parentNode.id);
+
+            createController.removeProject(project)
+        })
 
         return $rbut
     }

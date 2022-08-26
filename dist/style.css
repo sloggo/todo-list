@@ -402,3 +402,9 @@ img.removeProjectButton{
     background-color: #ff6e6e;
     border-radius: 100%;
 }
+
+div#content h1{
+    padding: 10px 30px;
+    font-size: 3rem;
+    color: white;
+}

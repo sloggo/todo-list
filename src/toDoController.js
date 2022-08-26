@@ -1,3 +1,5 @@
+import { createController } from "./createController";
+
 const toDoController = (function() {
     let toDos = [];
 
@@ -9,9 +11,14 @@ const toDoController = (function() {
         toDos.push(toDo)
     }
 
+    function remove(toDo){
+        toDos.splice(toDos.indexOf(createController.findItem(toDo)), 1)
+    }
+
     return{
         create,
-        getLength
+        getLength,
+        remove
     }
 })();
 
