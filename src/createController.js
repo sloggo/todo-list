@@ -61,10 +61,12 @@ const createController = (function(){
     }
 
     function removeProject(project){
-        project.subTasks.forEach(task =>{
-            removeSubTask(task);
-        })
-
+        if(project.subTasks){
+            project.subTasks.forEach(task =>{
+                removeSubTask(task);
+            })
+    
+        }
         items.splice(items.indexOf(items.find( i => i.itemId ===project.itemId)), 1)
 
         projectController.remove(project)

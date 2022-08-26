@@ -1,4 +1,7 @@
 import { createController } from "../../createController";
+import { storageController } from "../../storageController";
+import { subTaskController } from "../../subTaskController";
+import { toDoController } from "../../toDoController";
 
 const createToDoCard = (function(){
     function createContainer(toDo){
@@ -17,7 +20,7 @@ const createToDoCard = (function(){
             circleColour = '#fdff8d';
         }
 
-        if(toDo.complete){
+        if(createController.findItem(toDo.itemId).complete == true){
             $cardDiv.classList.add('complete');
         }
 
@@ -53,15 +56,19 @@ const createToDoCard = (function(){
             const $toDo = $checkBox.parentNode.parentNode;
             const toDoId = $toDo.id
 
-            const taskToUpdate = createController.findItem(toDoId)
-
-            if(taskToUpdate.complete === false){
-                taskToUpdate.complete = true;
+            if(createController.findItem(toDoId).complete === false){
+                createController.findItem(toDoId).complete = true;
+                e.target.checked = true;
                 $toDo.classList.toggle('complete');
-            } else if(taskToUpdate.complete === true) {
-                taskToUpdate.complete = false;
+                storageController.saveAll()
+            } else if(createController.findItem(toDoId).complete === true) {
+                createController.findItem(toDoId).complete = false;
+                e.target.checked = false;
                 $toDo.classList.toggle('complete');
+                storageController.saveAll()
             }
+
+            storageController.saveAll()
         })
 
         return $checkBox;

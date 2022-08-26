@@ -2,6 +2,8 @@ import { createController } from "./createController";
 import { displayController } from "./ui/displayController"
 import { storageController } from "./storageController";
 
+
+
 const $createItem = document.querySelector('li#createTask')
 
 const sampleProj1 = createController.createProject('Kitchen Cleanup');
@@ -20,6 +22,7 @@ createController.createToDo('Finish To-do app', 'Almost done!', 'medium', '11-09
 storageController.loadAll()
 
 displayController.renderDash()
+
 
 $createItem.addEventListener('click', ()=>{
     displayController.createItemPopup()

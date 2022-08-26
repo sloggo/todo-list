@@ -23,12 +23,18 @@ const toDoController = (function() {
         toDos = newItems
     }
 
+    function findItem(itemIds){
+        return toDos.find( i => i.itemId === itemIds)
+    }
+
+
     return{
         create,
         getLength,
         remove,
         getToDos,
-        loadToDos
+        loadToDos,
+        findItem
     }
 })();
 

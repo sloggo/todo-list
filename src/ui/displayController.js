@@ -56,6 +56,15 @@ const displayController = (function(){
         $bottomControls.classList.add('bottomControls');
         const $removeButton = createToDoCard.createRemoveButton(toDo);
         const $checkBox = createToDoCard.createCheckBox(toDo);
+
+        if(createController.findItem(toDo.itemId).complete === true){
+            $checkBox.checked = true;
+        } else{
+            $checkBox.checked = false;
+        }
+
+        storageController.saveAll()
+
         $bottomControls.appendChild($checkBox);
         $bottomControls.appendChild($removeButton);
 
@@ -74,7 +83,7 @@ const displayController = (function(){
             }
         })
 
-        storageController.saveAll()
+        storageController.saveAll();
     }
 
     function cleanDash(){

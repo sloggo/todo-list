@@ -39,7 +39,8 @@ const subTaskController = (function() {
         create,
         remove,
         getSubTasks,
-        loadSubTasks
+        loadSubTasks,
+        subTasks
     }
 })();
 

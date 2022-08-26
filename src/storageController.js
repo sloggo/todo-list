@@ -6,19 +6,17 @@ import { subTaskController } from "./subTaskController";
 
 const storageController = (function(){
     function saveAll(){
+        window.localStorage.clear()
         saveItems();
-        saveProjects();
-        saveToDos();
-        saveSubTasks();
     }
 
     function loadAll(){
         loadItems();
-            loadProjects();
-            loadSubTasks();
-            loadToDos();
+        loadProjects();
+        loadSubTasks();
+        loadToDos();
     }
-    
+
     function saveItems(){
         const items = createController.getItems()
         window.localStorage.setItem('items', JSON.stringify(items))
@@ -26,40 +24,24 @@ const storageController = (function(){
 
     function loadItems(){
         const items = JSON.parse(window.localStorage.getItem('items'));
-        console.log(items)
         createController.loadItems(items)
     }
 
-    function saveProjects(){
-        const projects = projectController.getProjects()
-        window.localStorage.setItem('projects', JSON.stringify(projects))
-    }
-
     function loadProjects(){
-        const projects = JSON.parse(window.localStorage.getItem('projects'));
-        console.log(projects)
+        const items = JSON.parse(window.localStorage.getItem('items'));
+        const projects = items.filter(i => i.type === 'project');
         projectController.loadProjects(projects)
     }
 
-    function saveToDos(){
-        const toDos = toDoController.getToDos()
-        window.localStorage.setItem('todos', JSON.stringify(toDos))
-    }
-
     function loadToDos(){
-        const toDos = JSON.parse(window.localStorage.getItem('todos'));
-        console.log(toDos)
+        const items = JSON.parse(window.localStorage.getItem('items'));
+        const toDos = items.filter(i => i.type === 'toDo');
         toDoController.loadToDos(toDos)
     }
 
-    function saveSubTasks(){
-        const subTasks = subTaskController.getSubTasks()
-        window.localStorage.setItem('subtasks', JSON.stringify(subTasks))
-    }
-
     function loadSubTasks(){
-        const subTasks = JSON.parse(window.localStorage.getItem('subtasks'));
-        console.log(subTasks)
+        const items = JSON.parse(window.localStorage.getItem('items'));
+        const subTasks = items.filter(i => i.type === 'subTask');
         subTaskController.loadSubTasks(subTasks)
     }
 

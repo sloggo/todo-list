@@ -18,7 +18,6 @@ const inputController = (function(){
         }
 
         displayController.renderDash();
-        
 
         createController.logItems();
     }

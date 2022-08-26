@@ -1,4 +1,6 @@
 import { createController } from "../../createController";
+import { storageController } from "../../storageController";
+import { subTaskController } from "../../subTaskController";
 import { displayController } from "../displayController";
 
 const createProjectCard = (function(){
@@ -25,8 +27,6 @@ const createProjectCard = (function(){
             $projectTask.classList.add('projectTask');
             $projectTask.id = subTask.itemId;
 
-            
-
             $projectTask.innerHTML = `
             <div class="taskText">
                             <div class="topTask">
@@ -45,10 +45,9 @@ const createProjectCard = (function(){
             $projectTaskContainer.appendChild($projectTask)
             const $checkBox = $projectTask.querySelector(`input`);
 
-            if(subTask.complete){
-                project.completeTasks++
+            if(createController.findItem(subTask.itemId).complete === true){
                 $checkBox.checked = true;
-                e.target.parentNode.classList.add('complete');
+                $projectTask.classList.add('complete');
             }
 
             const $trashButton = $projectTask.querySelector(`img`);
@@ -66,31 +65,33 @@ const createProjectCard = (function(){
             $checkBox.addEventListener('change', (e) =>{
                 let subTaskId = e.target.id
                 let subTask = createController.findItem(subTaskId)
-                let projectParent = createController.findItem(e.target.parentNode.parentNode.parentNode.id);
+                let projectParent = createController.findItem(subTask.parentId);
 
-                if(subTask.complete){
-                    subTask.complete = false;
+                if((createController.findItem(subTaskId)).complete === true){
+                    createController.findItem(subTaskId).complete = false;
                     if(e.target.parentNode.classList.contains('complete')){
                         e.target.parentNode.classList.remove('complete');
                         projectParent.completeTasks--
 
                         projectParent.percentage = (projectParent.completeTasks / projectParent.subTasks.length) *100
                         const $percentage = e.target.parentNode.parentNode.parentNode.querySelector('h3')
-                        $percentage.textContent = projectParent.percentage + '%'
+                        $percentage.textContent = Math.floor(projectParent.percentage) + '%'
                     }
-                } else if(!subTask.complete){
-                    subTask.complete = true;
+                } else if((createController.findItem(subTaskId)).complete === false){
+                    createController.findItem(subTaskId).complete = true;
                     e.target.parentNode.classList.add('complete')
                     projectParent.completeTasks++
 
                     projectParent.percentage = (projectParent.completeTasks / projectParent.subTasks.length) *100
 
                     const $percentage = e.target.parentNode.parentNode.parentNode.querySelector('h3')
-                    $percentage.textContent = projectParent.percentage + '%'
+                    $percentage.textContent = Math.floor(projectParent.percentage) + '%'
                 }
                 console.log('updating')
 
                 console.log(subTask)
+
+                storageController.saveAll()
             })
         })
 
@@ -101,7 +102,7 @@ const createProjectCard = (function(){
         const $percentage = document.createElement('h3');
         
         if(project.subTasks.length){
-            project.percentage = (project.completeTasks / project.subTasks.length) *100
+            project.percentage = Math.floor((project.completeTasks / project.subTasks.length) *100)
         } else{
             project.percentage = 0;
         }
