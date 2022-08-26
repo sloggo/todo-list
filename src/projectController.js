@@ -11,7 +11,7 @@ const projectController = (function() {
 
     return{
         getLength,
-        create
+        create,
     }
 })();
 

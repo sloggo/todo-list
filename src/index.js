@@ -1,10 +1,11 @@
 import { createController } from "./createController";
 import { displayController } from "./ui/displayController"
 
-displayController.createItemPopup()
 
-createController.createToDo('titlee', 'desc', 'high', '40/3/2322')
 const project = createController.createProject('project1')
+createController.createSubTask(project, 'title1', 'he',  'd')
+createController.createSubTask(project, 'title2', 'e',  'fsd')
+createController.createSubTask(project, 'title3', 'f',  'fs')
 createController.logItems()
-createController.createSubTask(project, 'subtask', 'desc', 'date')
-createController.logItems()
+
+displayController.renderDash()

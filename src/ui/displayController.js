@@ -1,4 +1,7 @@
+import { createController } from '../createController';
+ 
 import { createItemUI } from './ui-items/createItemUI'
+import { createProjectCard } from './ui-items/createProjectCard';
 
 const displayController = (function(){
     const $contentDiv = document.querySelector('div#content');
@@ -28,9 +31,35 @@ const displayController = (function(){
         $createTaskPopupContainer.remove()
     }
 
+    function createProject(project){
+        const $container = createProjectCard.createContainer(project);
+        $cardContainer.appendChild($container);
+        const $subTasks = createProjectCard.createSubTasks(project);
+        $container.appendChild($subTasks);
+        const $percentage = createProjectCard.createPercentage(project);
+        $container.appendChild($percentage);
+    }
+
+    function renderDash(){
+        const items = createController.getItems();
+        cleanDash()
+
+        items.forEach(item =>{
+            if(item.type === 'project'){
+                createProject(item);
+            } 
+        })
+    }
+
+    function cleanDash(){
+        $cardContainer.innerHTML = '';
+    }
+
     return{
         createItemPopup,
-        closeCreateItemPopup
+        closeCreateItemPopup,
+        createProject,
+        renderDash
     }
 })()
 

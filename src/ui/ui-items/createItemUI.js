@@ -91,6 +91,6 @@ const createItemUI = (function(){
         createCreateButton,
         createExitButton
     }
-})()
+})();
 
 export {createItemUI}

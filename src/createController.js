@@ -1,6 +1,7 @@
 import {toDoController} from './toDoController.js'
 import {projectController} from './projectController.js'
 import {subTaskController} from './subTaskController.js'
+import { displayController } from './ui/displayController.js';
 
 const createController = (function(){
     let items = [];
@@ -18,7 +19,7 @@ const createController = (function(){
     }
 
     function createProject(title){
-        let newProject = {type: 'project', title, tasks: [], complete: false};
+        let newProject = {type: 'project', title, subTasks: [], complete: false, completeTasks: 0, percentage: 0}
 
         newProject.itemId = items.length;
         items.push(newProject);
@@ -43,11 +44,22 @@ const createController = (function(){
     }
 
     function findItem(id){
-        return items.find(i => i.itemId === id);
+        const foundItem = items.find(i => i.itemId == id);
+        return foundItem
     }
 
     function logItems(){
         console.log(items)
+    }
+
+    function removeSubTask(subTask){
+        items.splice(items.indexOf(items.find( i => i.itemId ===subTask.itemId)), 1)
+        subTaskController.remove(subTask)
+        displayController.renderDash()
+    }
+
+    function getItems(){
+        return items;
     }
 
     return{
@@ -55,7 +67,9 @@ const createController = (function(){
         logItems,
         createToDo,
         createProject,
-        createSubTask
+        createSubTask,
+        removeSubTask,
+        getItems
     }
 })();
 
