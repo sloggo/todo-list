@@ -1,3 +1,6 @@
+import { displayController } from "../displayController";
+import { inputController } from "../inputController";
+
 const createItemUI = (function(){
     function createHeader(){
         const $h2 = document.createElement('h2');
@@ -58,9 +61,35 @@ const createItemUI = (function(){
         return $form
     }
 
+    function createCreateButton(){
+        let $createButton = document.createElement('p')
+        $createButton.id = 'button'
+        $createButton.textContent = 'Create Item';
+
+        $createButton.addEventListener('click', (e) => {
+            inputController.parseCreateItem();
+        })
+
+        return $createButton
+    }
+
+    function createExitButton(){
+        let $closeButton = document.createElement('p')
+        $closeButton.id = 'remButton'
+        $closeButton.textContent = 'Exit';
+
+        $closeButton.addEventListener('click', (e) => {
+            displayController.closeCreateItemPopup();
+        })
+
+        return $closeButton
+    }
+
     return{
         createFormBody,
-        createHeader
+        createHeader,
+        createCreateButton,
+        createExitButton
     }
 })()
 
