@@ -327,6 +327,7 @@ div.projectTask{
 }
 
 div.projectTask img#trash{
+    margin-left: auto;
     padding: 5px;
     align-self: center;
     width: 15px;
@@ -336,7 +337,6 @@ div.projectTask img#trash{
 }
 
 div.projectTask input{
-    margin-left: auto;
     transform: scale(1.4);
 }
 
