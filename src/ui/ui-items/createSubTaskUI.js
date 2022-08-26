@@ -1,10 +1,10 @@
 import { displayController } from "../displayController";
 import { inputController } from "../inputController";
 
-const createItemUI = (function(){
+const createSubTaskUI = (function(){
     function createHeader(){
         const $h2 = document.createElement('h2');
-        $h2.textContent='Create an Item';
+        $h2.textContent='Create a subtask';
         
         return $h2
     }
@@ -14,20 +14,6 @@ const createItemUI = (function(){
         const $form = document.createElement('form');
 
         $form.innerHTML = `
-            <div class="formInputContainer">
-                <label for="priority">Type</label>
-
-            <div class="radioContainer">
-                <input type="radio" name="type" value="toDo">
-                <input type="radio" name="type" value="project">  
-            </div>
-            <div class="labelRadioContainer">
-                <label for="toDo">ToDo</label>
-                <label for="project">Project</label>
-            </div>
-        </div>
-        
-
         <div class="formInputContainer">
                 <label for="title">Title</label>
                 <input type="text" name="title">
@@ -61,13 +47,13 @@ const createItemUI = (function(){
         return $form
     }
 
-    function createCreateButton(){
+    function createCreateButton(project){
         let $createButton = document.createElement('p')
         $createButton.id = 'button'
-        $createButton.textContent = 'Create Item';
+        $createButton.textContent = 'Create subtask';
 
         $createButton.addEventListener('click', (e) => {
-            inputController.parseCreateItem();
+            inputController.parseCreateSubTask(project);
             displayController.closeCreateItemPopup();
         })
 
@@ -94,4 +80,4 @@ const createItemUI = (function(){
     }
 })();
 
-export {createItemUI}
+export {createSubTaskUI}

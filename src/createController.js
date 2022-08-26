@@ -27,13 +27,14 @@ const createController = (function(){
         newProject.projectId = projectController.getLength();
 
         projectController.create(newProject);
+
+        console.log(items)
         return newProject
     }
 
-    function createSubTask(project, title, description, date){
+    function createSubTask(project, title, description, priority, date){
         const parentId = project.itemId;
-        let newSubTask = {type: 'subTask', parentId, title, description, date, complete: false};
-
+        let newSubTask = {type: 'subTask', parentId, title, description, priority, date, complete: false};
         newSubTask.itemId = items.length
         items.push(newSubTask);
 

@@ -2,6 +2,7 @@ import { createController } from '../createController';
  
 import { createItemUI } from './ui-items/createItemUI'
 import { createProjectCard } from './ui-items/createProjectCard';
+import { createSubTaskUI } from './ui-items/createSubTaskUI';
 
 const displayController = (function(){
     const $contentDiv = document.querySelector('div#content');
@@ -36,8 +37,13 @@ const displayController = (function(){
         $cardContainer.appendChild($container);
         const $subTasks = createProjectCard.createSubTasks(project);
         $container.appendChild($subTasks);
-        const $percentage = createProjectCard.createPercentage(project);
-        $container.appendChild($percentage);
+        const $bottomControls = document.createElement('div');
+        $bottomControls.classList.add('bottomInfo')
+        $bottomControls.appendChild(createProjectCard.createAddButton(project))
+        $bottomControls.appendChild(createProjectCard.createPercentage(project))
+        $bottomControls.appendChild(createProjectCard.createRemoveButton(project))
+
+        $container.appendChild($bottomControls)
     }
 
     function renderDash(){
@@ -45,7 +51,7 @@ const displayController = (function(){
         cleanDash()
 
         items.forEach(item =>{
-            if(item.type === 'project'){
+            if(item.type == 'project'){
                 createProject(item);
             } 
         })
@@ -55,11 +61,30 @@ const displayController = (function(){
         $cardContainer.innerHTML = '';
     }
 
+    function createSubTaskPopup(project){
+        const $createTaskPopupContainer = document.createElement('div');
+        $createTaskPopupContainer.classList.add('createTaskPopup');
+
+        let $header = createSubTaskUI.createHeader();
+        let $formBody = createSubTaskUI.createFormBody();
+        let $create = createSubTaskUI.createCreateButton(project);
+        let $exit = createSubTaskUI.createExitButton();
+
+        $createTaskPopupContainer.appendChild($header)
+        $createTaskPopupContainer.appendChild($formBody)
+        $createTaskPopupContainer.appendChild($create)
+        $createTaskPopupContainer.appendChild($exit)
+
+        $contentDiv.appendChild($createTaskPopupContainer)
+    }
+
+
     return{
         createItemPopup,
         closeCreateItemPopup,
         createProject,
-        renderDash
+        renderDash,
+        createSubTaskPopup
     }
 })()
 

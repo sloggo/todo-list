@@ -1,4 +1,5 @@
 import { createController } from "../../createController";
+import { displayController } from "../displayController";
 
 const createProjectCard = (function(){
     function createContainer(project){
@@ -24,9 +25,7 @@ const createProjectCard = (function(){
             $projectTask.classList.add('projectTask');
             $projectTask.id = subTask.itemId;
 
-            if(subTask.complete){
-                project.completeTasks++
-            }
+            
 
             $projectTask.innerHTML = `
             <div class="taskText">
@@ -44,6 +43,12 @@ const createProjectCard = (function(){
             `
 
             $projectTaskContainer.appendChild($projectTask)
+            const $checkBox = $projectTask.querySelector(`input`);
+
+            if(subTask.complete){
+                project.completeTasks++
+                $checkBox.checked = true;
+            }
 
             const $trashButton = $projectTask.querySelector(`img`);
 
@@ -56,6 +61,36 @@ const createProjectCard = (function(){
                 console.log(taskToRem)
                 createController.removeSubTask(taskToRem)
             })
+
+            $checkBox.addEventListener('change', (e) =>{
+                let subTaskId = e.target.id
+                let subTask = createController.findItem(subTaskId)
+                let projectParent = createController.findItem(e.target.parentNode.parentNode.parentNode.id);
+
+                if(subTask.complete){
+                    subTask.complete = false;
+                    if(e.target.parentNode.classList.contains('complete')){
+                        e.target.parentNode.classList.remove('complete');
+                        projectParent.completeTasks--
+
+                        projectParent.percentage = (projectParent.completeTasks / projectParent.subTasks.length) *100
+                        const $percentage = e.target.parentNode.parentNode.parentNode.querySelector('h3')
+                        $percentage.textContent = projectParent.percentage + '%'
+                    }
+                } else if(!subTask.complete){
+                    subTask.complete = true;
+                    e.target.parentNode.classList.add('complete')
+                    projectParent.completeTasks++
+
+                    projectParent.percentage = (projectParent.completeTasks / projectParent.subTasks.length) *100
+
+                    const $percentage = e.target.parentNode.parentNode.parentNode.querySelector('h3')
+                    $percentage.textContent = projectParent.percentage + '%'
+                }
+                console.log('updating')
+
+                console.log(subTask)
+            })
         })
 
     return $projectTaskContainer
@@ -64,17 +99,45 @@ const createProjectCard = (function(){
     function createPercentage(project){
         const $percentage = document.createElement('h3');
         
-        project.percentage = (project.completeTasks / project.subTasks.length) *100
-
+        if(project.subTasks.length){
+            project.percentage = (project.completeTasks / project.subTasks.length) *100
+        } else{
+            project.percentage = 0;
+        }
         $percentage.textContent = project.percentage + '%'
 
         return $percentage
     }
 
+    function createAddButton(project){
+        let $but = document.createElement('img');
+        $but.src='./images/plus-circle.svg';
+        $but.classList.add('addTaskButton')
+
+        $but.addEventListener('click', (e) => {
+            console.log('addclick')
+            const project = createController.findItem(e.target.parentNode.parentNode.id);
+
+            displayController.createSubTaskPopup(project)
+        })
+
+        return $but
+    }
+
+    function createRemoveButton(project){
+        let $rbut = document.createElement('img');
+        $rbut.src='./images/trash-2.svg';
+        $rbut.classList.add('removeProjectButton')
+
+        return $rbut
+    }
+
     return{
         createContainer,
         createSubTasks,
-        createPercentage
+        createPercentage,
+        createAddButton,
+        createRemoveButton
     }
 })();
 
