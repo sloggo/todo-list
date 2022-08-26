@@ -1,4 +1,5 @@
 import { allController } from "./allController";
+import { projectController } from "./projectController";
 
 const projectDisplay = (function(){
     const $cardContainer = document.querySelector('div#cardContainer');
@@ -28,6 +29,7 @@ const projectDisplay = (function(){
         project.tasks.forEach(task => {
             const $projectTask = document.createElement('div');
             $projectTask.classList.add('projectTask');
+            $projectTask.id = task.id;
 
             if(task.complete){
                 completeTasks++
@@ -49,6 +51,20 @@ const projectDisplay = (function(){
             `
 
             $projectTaskContainer.appendChild($projectTask)
+            
+            const $trashButton = $projectTask.querySelector(`img`);
+
+            $trashButton.addEventListener('click', (e) => {
+                let taskContainer = e.target.parentNode;
+                let projectContainer = taskContainer.parentNode.parentNode;
+
+                console.log('removing')
+
+                let projectToRemoveFrom = projectController.getProjects().find(i=> i.id === projectContainer.id);
+                let taskToRemove = projectToRemoveFrom.tasks.find(i => i.id === taskContainer.id);
+
+                projectController.removeTask(projectToRemoveFrom, taskToRemove)
+            })
         });
 
         project.percentage = (completeTasks / project.tasks.length) *100
