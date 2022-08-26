@@ -15,10 +15,20 @@ const projectController = (function() {
         projects.splice(projects.indexOf(createController.findItem(project)), 1)
     }
 
+    function getProjects(){
+        return projects;
+    }
+
+    function loadProjects(newItems){
+        projects = newItems
+    }
+
     return{
         getLength,
         create,
-        remove
+        remove,
+        getProjects,
+        loadProjects
     }
 })();
 

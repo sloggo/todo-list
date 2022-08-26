@@ -2,6 +2,7 @@ import {toDoController} from './toDoController.js'
 import {projectController} from './projectController.js'
 import {subTaskController} from './subTaskController.js'
 import { displayController } from './ui/displayController.js';
+import { storageController } from './storageController.js';
 
 const createController = (function(){
     let items = [];
@@ -80,6 +81,10 @@ const createController = (function(){
         return items;
     }
 
+    function loadItems(newItems){
+        items = newItems
+    }
+
     return{
         findItem,
         logItems,
@@ -89,7 +94,8 @@ const createController = (function(){
         removeSubTask,
         getItems,
         removeProject,
-        removeToDo
+        removeToDo,
+        loadItems
     }
 })();
 

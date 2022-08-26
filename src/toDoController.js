@@ -15,10 +15,20 @@ const toDoController = (function() {
         toDos.splice(toDos.indexOf(createController.findItem(toDo)), 1)
     }
 
+    function getToDos(){
+        return toDos;
+    }
+
+    function loadToDos(newItems){
+        toDos = newItems
+    }
+
     return{
         create,
         getLength,
-        remove
+        remove,
+        getToDos,
+        loadToDos
     }
 })();
 

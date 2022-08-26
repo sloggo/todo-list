@@ -1,5 +1,6 @@
 import { createController } from "./createController";
 import { displayController } from "./ui/displayController"
+import { storageController } from "./storageController";
 
 const $createItem = document.querySelector('li#createTask')
 
@@ -16,6 +17,7 @@ createController.createSubTask(sampleProj2, 'Science Lab Report', 'Effects of sa
 
 createController.createToDo('Finish To-do app', 'Almost done!', 'medium', '11-09-2022')
 
+storageController.loadAll()
 displayController.renderDash()
 
 $createItem.addEventListener('click', ()=>{

@@ -4,6 +4,7 @@ import { createItemUI } from './ui-items/createItemUI'
 import { createProjectCard } from './ui-items/createProjectCard';
 import { createSubTaskUI } from './ui-items/createSubTaskUI';
 import { createToDoCard } from './ui-items/createToDoCard';
+import { storageController } from '../storageController';
 
 const displayController = (function(){
     const $contentDiv = document.querySelector('div#content');
@@ -72,6 +73,8 @@ const displayController = (function(){
                 createToDo(item);
             }
         })
+
+        storageController.saveAll()
     }
 
     function cleanDash(){

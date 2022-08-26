@@ -25,11 +25,21 @@ const subTaskController = (function() {
 
     }
 
+    function getSubTasks(){
+        return subTasks;
+    }
+
+    function loadSubTasks(newItems){
+        subTasks = newItems
+    }
+
 
     return{
         getLength,
         create,
-        remove
+        remove,
+        getSubTasks,
+        loadSubTasks
     }
 })();
 
