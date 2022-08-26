@@ -14,10 +14,11 @@ const createController = (function(){
         newToDo.toDoId = toDoController.getLength()
 
         toDoController.create(newToDo)
+        return newToDo
     }
 
-    function createProject(title, tasks){
-        let newProject = {type: 'project', title, tasks, complete: false};
+    function createProject(title){
+        let newProject = {type: 'project', title, tasks: [], complete: false};
 
         newProject.itemId = items.length;
         items.push(newProject);
@@ -25,10 +26,12 @@ const createController = (function(){
         newProject.projectId = projectController.getLength();
 
         projectController.create(newProject);
+        return newProject
     }
 
     function createSubTask(project, title, description, date){
-        let newSubTask = {type: 'subTask', parent: project.itemId, title, description, date, complete: false};
+        const parentId = project.itemId;
+        let newSubTask = {type: 'subTask', parentId, title, description, date, complete: false};
 
         newSubTask.itemId = items.length
         items.push(newSubTask);
@@ -36,6 +39,7 @@ const createController = (function(){
         newSubTask.subTaskId = subTaskController.getLength()
 
         subTaskController.create(newSubTask);
+        return newSubTask
     }
 
     function findItem(id){

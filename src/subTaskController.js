@@ -8,7 +8,7 @@ const subTaskController = (function() {
     }
 
     function create(subTask){
-        const projectToAddTo = createController.findItem(subTask.parent);
+        const projectToAddTo = createController.findItem(subTask.parentId);
         subTasks.push(subTask);
 
         projectToAddTo.tasks.push(subTask)
