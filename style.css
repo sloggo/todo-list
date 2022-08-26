@@ -325,6 +325,10 @@ div.projectTask{
     border-bottom: 1px solid #e4e4e4;;
 }
 
+div.projectTask.complete{
+    background-color: rgb(221, 255, 212);
+}
+
 div.projectTask img.trash{
     margin-left: auto;
     padding: 5px;
@@ -348,13 +352,17 @@ div.projectTask div.colourCircleTask{
 }
 
 div.card.project h3{
+    font-size: 2rem;
+}
+
+div.card.project div.bottomInfo{
+    justify-content: space-evenly;
+    display: flex;
     padding-top: 15px;
     border-top: 2px solid #e4e4e4;
     width: 100%;
     text-align: center;
     margin-top: auto;
-    align-self: center;
-    font-size: 2rem;
 }
 
 div.topTask{
@@ -375,4 +383,22 @@ div.taskText{
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+img.addTaskButton{
+    padding: 10px;
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(151, 255, 147);
+    border-radius: 100%;
+}
+
+img.removeProjectButton{
+    padding: 10px;
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    background-color: #ff6e6e;
+    border-radius: 100%;
 }
