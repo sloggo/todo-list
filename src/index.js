@@ -10,5 +10,5 @@ $createTaskButton.addEventListener('click', () => {
     taskDisplay.createTaskPopup()
 });
 
-let sampleProject = projectController.createProject('Sample Project')
+let sampleProject = projectController.createProject('Sample Project', [{title: 'tasktitle', description: 'taskdescription', date: 'taskdate', complete: false},{title: 'tasktitle', description: 'taskdescription', date: 'taskdate', complete: true}])
 projectDisplay.createProjectCard(sampleProject)
