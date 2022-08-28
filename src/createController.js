@@ -6,6 +6,16 @@ import { storageController } from './storageController.js';
 
 const createController = (function(){
     let items = [];
+    let currentItems = items;
+    
+
+    function getCurrentItems(){
+        return currentItems;
+    }
+
+    function setCurrentItems(newArray){
+        currentItems = newArray;
+    }
 
     function createToDo(title, description, priority, date){
         let newToDo = {type: 'toDo', title, description, priority, date, complete: false}
@@ -97,7 +107,9 @@ const createController = (function(){
         getItems,
         removeProject,
         removeToDo,
-        loadItems
+        loadItems,
+        setCurrentItems,
+        getCurrentItems
     }
 })();
 

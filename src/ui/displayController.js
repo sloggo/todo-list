@@ -72,10 +72,10 @@ const displayController = (function(){
     }
 
     function renderDash(){
-        const items = createController.getItems();
+        const itemArray = createController.getCurrentItems()
         cleanDash()
 
-        items.forEach(item =>{
+        itemArray.forEach(item =>{
             if(item.type == 'project'){
                 createProject(item);
             } else if(item.type == 'toDo'){

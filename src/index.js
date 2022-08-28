@@ -1,10 +1,16 @@
 import { createController } from "./createController";
 import { displayController } from "./ui/displayController"
 import { storageController } from "./storageController";
+import { sortController } from "./sortController";
 
+const $contentTitle = document.querySelector('div#content h1');
 
-
+const $dashboard = document.querySelector('li#dashboard')
+const $projects = document.querySelector('li#projects')
+const $toDos = document.querySelector('li#toDos')
 const $createItem = document.querySelector('li#createTask')
+const $today = document.querySelector('li#today')
+const $thisWeek = document.querySelector('li#thisWeek')
 
 const sampleProj1 = createController.createProject('Kitchen Cleanup');
 createController.createSubTask(sampleProj1, 'Clean the dishes', 'In the sink from last night', 'high', '28-08-2022')
@@ -26,4 +32,29 @@ displayController.renderDash()
 
 $createItem.addEventListener('click', ()=>{
     displayController.createItemPopup()
+})
+
+$dashboard.addEventListener('click', () => {
+    $contentTitle.textContent = 'Dashboard'
+    sortController.defaultDash();
+})
+
+$projects.addEventListener('click', () => {
+    $contentTitle.textContent = 'Projects'
+    sortController.projects();
+})
+
+$toDos.addEventListener('click', () => {
+    $contentTitle.textContent = 'ToDos'
+    sortController.toDos();
+})
+
+$today.addEventListener('click', () => {
+    $contentTitle.textContent = 'Today'
+    sortController.itemsToday();
+})
+
+$thisWeek.addEventListener('click', () => {
+    $contentTitle.textContent = 'This Week'
+    sortController.itemsThisWeek();
 })
