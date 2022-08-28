@@ -19,7 +19,6 @@ const sortController = (function(){
         })
 
         createController.setCurrentItems(itemsToday)
-        displayController.renderDash()
     }
 
     function itemsThisWeek(){
@@ -40,14 +39,12 @@ const sortController = (function(){
 
         createController.setCurrentItems(itemsThisWeek)
 
-        displayController.renderDash()
     }
 
     function defaultDash(){
         const items = createController.getItems();
         createController.setCurrentItems(items);
 
-        displayController.renderDash()
     }
 
     function projects(){
@@ -68,7 +65,6 @@ const sortController = (function(){
 
         createController.setCurrentItems(projects)
 
-        displayController.renderDash()
     }
 
     function toDos(){
@@ -89,7 +85,6 @@ const sortController = (function(){
 
         createController.setCurrentItems(toDos)
 
-        displayController.renderDash()
     }
 
 

@@ -5,6 +5,7 @@ import { createProjectCard } from './ui-items/createProjectCard';
 import { createSubTaskUI } from './ui-items/createSubTaskUI';
 import { createToDoCard } from './ui-items/createToDoCard';
 import { storageController } from '../storageController';
+import { sortController } from '../sortController';
 
 const displayController = (function(){
     const $contentDiv = document.querySelector('div#content');
@@ -72,6 +73,19 @@ const displayController = (function(){
     }
 
     function renderDash(){
+        const $contentTitle = document.querySelector('div#content h1');
+        if($contentTitle.textContent === 'Dashboard'){
+            sortController.defaultDash();
+        } else if($contentTitle.textContent === 'Today'){
+            sortController.itemsToday();
+        } else if($contentTitle.textContent === 'This Week'){
+            sortController.itemsThisWeek();
+        } else if($contentTitle.textContent === 'Projects'){
+            sortController.projects();
+        } else if($contentTitle.textContent === 'ToDos'){
+            sortController.toDos();
+        }
+
         const itemArray = createController.getCurrentItems()
         cleanDash()
 
