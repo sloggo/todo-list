@@ -1,3 +1,4 @@
+import { sub } from "date-fns";
 import { createController } from "../../createController";
 import { storageController } from "../../storageController";
 import { subTaskController } from "../../subTaskController";
@@ -27,7 +28,18 @@ const createProjectCard = (function(){
             $projectTask.classList.add('projectTask');
             $projectTask.id = subTask.itemId;
 
+            let circleColour = "";
+
+            if(subTask.priority === 'high'){
+                circleColour = '#ff6e6e';
+            } else if(subTask.priority === 'medium'){
+                circleColour = '#ffb46e';
+            } else if(subTask.priority === 'low'){
+                circleColour = '#fdff8d';
+            }
+
             $projectTask.innerHTML = `
+            <div id="colourCircle" style='background-color:${circleColour};'>&nbsp;</div>
             <div class="taskText">
                             <div class="topTask">
                                 <p class="title">${subTask.title}</p>
