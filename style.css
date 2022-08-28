@@ -5,11 +5,13 @@
 
 body{
     font-family: 'Arvo', sans-serif;
+    background-repeat: no-repeat;
     background-image: linear-gradient(#FF8787, #FFD28D);
+    background-attachment: fixed;
 
     display: grid;
     grid-template-columns: 250px 7fr;
-    grid-template-rows: 100px calc(100vh - 100px);
+    grid-template-rows: 100px minmax(calc(100vh - 100px), auto);
     grid-template-areas: "header header"
     "sidebar content";
 }
@@ -76,6 +78,7 @@ div#sidebar{
     padding-top: 75px;
 
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     align-items: center;
     background-color: rgb(71, 71, 71);
