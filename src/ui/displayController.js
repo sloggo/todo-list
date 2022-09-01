@@ -36,6 +36,13 @@ const displayController = (function(){
     }
 
     function createProject(project){
+        project.completeTasks = 0
+        project.subTasks.forEach(task => {
+            if(task.complete === true){
+                project.completeTasks++
+            }
+        })
+
         const $container = createProjectCard.createContainer(project);
         $cardContainer.appendChild($container);
         const $subTasks = createProjectCard.createSubTasks(project);
