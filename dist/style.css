@@ -125,6 +125,12 @@ div#cardContainer{
     gap:20px;
 }
 
+@media screen and (max-width: 1500px){
+    div#cardContainer{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 div#cardContainer div.card.task{
     animation: dropIn .5s;
     padding: 20px;
