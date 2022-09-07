@@ -19,7 +19,9 @@ const subTaskController = (function() {
         subTasks.splice(subTasks.indexOf(subTasks.find(i => i.itemId === subTask.itemId)), 1)
         const parentProject = createController.findItem(subTask.parentId);
         console.log(parentProject)
-        parentProject.completeTasks = parentProject.completeTasks--;
+        if(subTask.complete == true){
+            parentProject.completeTasks = parentProject.completeTasks--;
+        }
         const indexOfTask = parentProject.subTasks.indexOf(parentProject.subTasks.find(i => i.id === subTask.id));
 
         parentProject.subTasks.splice(parentProject.subTasks.indexOf(parentProject.subTasks.find(i => i.itemId === subTask.itemId)),1);
