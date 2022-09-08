@@ -56,7 +56,6 @@ header input{
 }
 
 header input:focus{
-    appearance: none;
     border: none;
 }
 

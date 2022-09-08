@@ -18,6 +18,7 @@ $searchInput.addEventListener('change', (e)=>{
     searchController.search(e.target.value)
 })
 
+
 $createItem.addEventListener('click', ()=>{
     displayController.createItemPopup()
 })
