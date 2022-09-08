@@ -5,14 +5,18 @@ const searchController = (function(){
     function search(text){
         if(text==false){
             displayController.renderDash()
+        }else{
+            const items = createController.getCurrentItems();
+            const itemFilteredTitle = items.filter( i=> i.title.toLowerCase().includes(text.toLowerCase()) );
+            const itemFilteredDesc = items.filter( i=> i.description.toLowerCase().includes(text.toLowerCase()));
+
+            const filteredItems = itemFilteredTitle.concat(itemFilteredDesc)
+
+            console.log(filteredItems)
+
+            createController.setCurrentItems(filteredItems);
+            displayController.renderDash(true)
         }
-        const items = createController.getCurrentItems();
-        const itemFiltered = items.filter( i=> i.title.toLowerCase().includes(text.toLowerCase()) );
-
-        console.log(itemFiltered)
-
-        createController.setCurrentItems(itemFiltered);
-        displayController.renderDash(true)
     }
 
     return {

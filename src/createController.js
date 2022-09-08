@@ -7,7 +7,6 @@ import { storageController } from './storageController.js';
 const createController = (function(){
     let items = [];
     let currentItems = items;
-    let filtered = false;
     
 
     function getCurrentItems(){
