@@ -122,12 +122,12 @@ const displayController = (function(){
         let $create = createSubTaskUI.createCreateButton(project);
         let $exit = createSubTaskUI.createExitButton();
 
-        $createTaskPopupContainer.appendChild($header)
-        $createTaskPopupContainer.appendChild($formBody)
-        $createTaskPopupContainer.appendChild($create)
-        $createTaskPopupContainer.appendChild($exit)
+        $createTaskPopupContainer.appendChild($header);
+        $createTaskPopupContainer.appendChild($formBody);
+        $createTaskPopupContainer.appendChild($create);
+        $createTaskPopupContainer.appendChild($exit);
 
-        $contentDiv.appendChild($createTaskPopupContainer)
+        $contentDiv.appendChild($createTaskPopupContainer);
     }
 
 
