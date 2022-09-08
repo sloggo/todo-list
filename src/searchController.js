@@ -8,7 +8,14 @@ const searchController = (function(){
         }else{
             const items = createController.getCurrentItems();
             const itemFilteredTitle = items.filter( i=> i.title.toLowerCase().includes(text.toLowerCase()) );
-            const itemFilteredDesc = items.filter( i=> i.description.toLowerCase().includes(text.toLowerCase()));
+            const itemFilteredDescType = items.filter( i=> (i.type === 'subTask') || (i.type === 'toDo'))
+            const itemFilteredDesc = itemFilteredDescType.filter( i=> i.description.toLowerCase().includes(text.toLowerCase()));
+
+            itemFilteredDesc.forEach(item => {
+                if(itemFilteredTitle.includes(item)){
+                    itemFilteredDesc.splice(itemFilteredDesc.indexOf(item),1)
+                }
+            })
 
             const filteredItems = itemFilteredTitle.concat(itemFilteredDesc)
 
