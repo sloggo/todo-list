@@ -1,4 +1,5 @@
 import { createController } from "../createController";
+import { searchController } from "../searchController";
 import { sortController } from "../sortController";
 import { displayController } from "./displayController";
 
@@ -19,6 +20,7 @@ const inputController = (function(){
         }
 
         displayController.renderDash();
+        searchController.clearSearch();
 
         createController.logItems();
     }
@@ -32,6 +34,7 @@ const inputController = (function(){
         createController.createSubTask(project, title,description, priority, date)
 
         displayController.renderDash();
+        searchController.clearSearch();
 
         createController.logItems()
     }

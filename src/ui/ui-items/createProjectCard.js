@@ -83,7 +83,7 @@ const createProjectCard = (function(){
                     createController.findItem(subTaskId).complete = false;
                     if(e.target.parentNode.classList.contains('complete')){
                         e.target.parentNode.classList.remove('complete');
-                        projectParent.completeTasks--
+                        projectParent.completeTasks--; 
 
                         projectParent.percentage = (projectParent.completeTasks / projectParent.subTasks.length) *100
                         const $percentage = e.target.parentNode.parentNode.parentNode.querySelector('h3')

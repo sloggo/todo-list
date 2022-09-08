@@ -25,30 +25,35 @@ $createItem.addEventListener('click', ()=>{
 
 $dashboard.addEventListener('click', () => {
     $contentTitle.textContent = 'Dashboard'
+    searchController.clearSearch()
     sortController.defaultDash();
     displayController.renderDash()
 })
 
 $projects.addEventListener('click', () => {
     $contentTitle.textContent = 'Projects'
+    searchController.clearSearch()
     sortController.projects();
     displayController.renderDash()
 })
 
 $toDos.addEventListener('click', () => {
     $contentTitle.textContent = 'ToDos'
+    searchController.clearSearch()
     sortController.toDos();
     displayController.renderDash()
 })
 
 $today.addEventListener('click', () => {
     $contentTitle.textContent = 'Today'
+    searchController.clearSearch()
     sortController.itemsToday();
     displayController.renderDash()
 })
 
 $thisWeek.addEventListener('click', () => {
     $contentTitle.textContent = 'This Week'
+    searchController.clearSearch()
     sortController.itemsThisWeek();
     displayController.renderDash()
 })

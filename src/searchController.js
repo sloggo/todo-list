@@ -26,8 +26,17 @@ const searchController = (function(){
         }
     }
 
+    function clearSearch(){
+        const $searchInput = document.getElementById('searchbarInput')
+        console.log($searchInput.value)
+
+        $searchInput.value = '';
+        console.log($searchInput.value)
+    }
+
     return {
-        search
+        search,
+        clearSearch
     }
 })();
 
