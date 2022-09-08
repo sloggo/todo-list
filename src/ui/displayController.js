@@ -79,18 +79,20 @@ const displayController = (function(){
         $container.appendChild($bottomControls)
     }
 
-    function renderDash(){
+    function renderDash(filtered = false){
         const $contentTitle = document.querySelector('div#content h1');
-        if($contentTitle.textContent === 'Dashboard'){
-            sortController.defaultDash();
-        } else if($contentTitle.textContent === 'Today'){
-            sortController.itemsToday();
-        } else if($contentTitle.textContent === 'This Week'){
-            sortController.itemsThisWeek();
-        } else if($contentTitle.textContent === 'Projects'){
-            sortController.projects();
-        } else if($contentTitle.textContent === 'ToDos'){
-            sortController.toDos();
+        if (filtered === false){
+            if($contentTitle.textContent === 'Dashboard'){
+                sortController.defaultDash();
+            } else if($contentTitle.textContent === 'Today'){
+                sortController.itemsToday();
+            } else if($contentTitle.textContent === 'This Week'){
+                sortController.itemsThisWeek();
+            } else if($contentTitle.textContent === 'Projects'){
+                sortController.projects();
+            } else if($contentTitle.textContent === 'ToDos'){
+                sortController.toDos();
+            }
         }
 
         const itemArray = createController.getCurrentItems()

@@ -2,15 +2,21 @@ import { createController } from "./createController";
 import { displayController } from "./ui/displayController"
 import { storageController } from "./storageController";
 import { sortController } from "./sortController";
+import { searchController } from "./searchController";
 
 const $contentTitle = document.querySelector('div#content h1');
-
 const $dashboard = document.querySelector('li#dashboard')
 const $projects = document.querySelector('li#projects')
 const $toDos = document.querySelector('li#toDos')
 const $createItem = document.querySelector('li#createTask')
 const $today = document.querySelector('li#today')
 const $thisWeek = document.querySelector('li#thisWeek')
+const $searchInput = document.getElementById('searchbarInput')
+
+$searchInput.addEventListener('change', (e)=>{
+    console.log(e.target.value)
+    searchController.search(e.target.value)
+})
 
 
 $createItem.addEventListener('click', ()=>{
@@ -46,6 +52,8 @@ $thisWeek.addEventListener('click', () => {
     sortController.itemsThisWeek();
     displayController.renderDash()
 })
+
+
 
 storageController.loadAll()
 sortController.defaultDash();
